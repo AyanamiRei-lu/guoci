@@ -29,9 +29,9 @@ android {
         // 在 8.0 上都有；再往下要为 java.time 做 desugaring，不值得。
         minSdk = 26
         targetSdk = 37
-        // 1.1.0：词库学习顺序改为按词性加权（实词与复杂介词提前，小学虚词置后）。
-        versionCode = 2
-        versionName = "1.1.0"
+        // 1.2.0：测验改用内置键盘，彻底绕开系统输入法的纠错与联想（防作弊）。
+        versionCode = 3
+        versionName = "1.2.0"
     }
 
     buildFeatures {

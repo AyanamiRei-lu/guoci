@@ -197,7 +197,7 @@ fun SettingsScreen(
                 fontSize = 12.sp,
             )
             Spacer(Modifier.height(8.dp))
-            Text("版本 1.1.0", color = Muted, fontSize = 12.sp)
+            Text("版本 1.2.0", color = Muted, fontSize = 12.sp)
             Spacer(Modifier.height(30.dp))
         }
     }
