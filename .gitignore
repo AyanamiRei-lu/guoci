@@ -1,0 +1,32 @@
+# Gradle / 鏋勫缓浜х墿
+.gradle/
+build/
+.kotlin/
+.cxx/
+.externalNativeBuild/
+
+# 鏈哄櫒鐩稿叧锛歴dk.dir 鎸囧悜鏈満璺緞锛岀粷涓嶈兘鎻愪氦
+local.properties
+
+# IDE
+.idea/
+*.iml
+
+# 绛惧悕鏉愭枡锛堣嚜鐢ㄧ鍚嶄篃涓嶈杩涗粨搴擄級
+*.jks
+*.keystore
+keystore.properties
+
+# 鎵撳寘浜х墿
+*.apk
+*.aab
+captures/
+
+# 鏉傞」
+*.log
+.DS_Store
+Thumbs.db
+
+# Python 缓存（tools/ 下的脚本会被 import 来做排查）
+__pycache__/
+*.pyc

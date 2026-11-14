@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      平台主题，不引 AppCompat：这个 App 的界面全部是 Compose，没有 Activity 级别的
+      主题依赖。状态栏交给 Compose 的 edge-to-edge 处理，这里只保证窗口底色正确，
+      避免冷启动时先闪一帧白/黑。
+    -->
+    <style name="Theme.Guoci" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">#FFFDFDF8</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

@@ -1,0 +1,31 @@
+# 只跑"不需要 Android SDK"的部分：
+# 词库结构/排序校验 + :core 的 JVM 单测。实测在没有 SDK、没有 local.properties 的
+# 机器上 `./gradlew :core:test` 可以完成配置并跑完（:app 不会被编译）。
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装 JDK 25（与 gradle/gradle-daemon-jvm.properties 一致）
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: 校验词库（3500 条 / 字段完整 / 开头必须是实义词）
+        run: python3 tools/validate-words.py app/src/main/assets/words.json
+
+      - name: 单元测试（间隔表、会话状态机、判分、导出、默写单排版）
+        run: |
+          chmod +x gradlew
+          ./gradlew :core:test --console=plain

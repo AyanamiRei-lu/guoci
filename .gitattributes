@@ -1,0 +1,19 @@
+# 统一换行，避免 Windows 上提交的 CRLF 让 diff 里每个文件都变成"整文件改动"
+* text=auto eol=lf
+
+# Windows 批处理必须是 CRLF，否则 cmd 解析会把行尾吃掉
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 二进制：不要尝试合并或转换
+*.apk binary
+*.jar binary
+*.aab binary
+*.png binary
+*.jpg binary
+*.webp binary
+*.ttf binary
+*.zip binary
+
+# 生成物与词库不参与 diff 统计
+app/src/main/assets/words.json -diff linguist-generated

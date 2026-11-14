@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      只请求两个权限，都能对应到用户能看见的一件事：
+
+      POST_NOTIFICATIONS   每日一条提醒（Android 13+ 需要运行时授权）。
+      RECEIVE_BOOT_COMPLETED  手机重启后把提醒重新挂上，否则重启一次提醒就永久消失。
+
+      刻意缺失、并且必须保持缺失：INTERNET（这个 App 完全离线，词库随包）、
+      READ/WRITE_EXTERNAL_STORAGE（导出走系统分享面板与 SAF）、位置、通讯录、
+      麦克风、任何广告标识。进度只存在应用自己的 filesDir 里。
+    -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Guoci">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Guoci"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 导出的 PDF / CSV 通过 content:// 分享出去，不写公共存储。 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.files"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <receiver
+            android:name=".platform.BootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 每日提醒。用显式 Intent 投递，导出关掉即可，不需要外部应用唤得动它。 -->
+        <receiver
+            android:name=".platform.ReminderReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.guoci.vocab3500.REMIND" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
