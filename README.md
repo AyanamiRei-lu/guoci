@@ -1,5 +1,8 @@
 # 过词 · 高中 3500
 
+[![CI](https://github.com/AyanamiRei-lu/guoci/actions/workflows/ci.yml/badge.svg)](https://github.com/AyanamiRei-lu/guoci/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 一个**只干一件事**的安卓背单词 App：每天 10 个新词 + 到期复习词，学完立刻考拼写，
 **全对才算今天完成**。错的词明天还会回来找你；不会的词可以导出去；随时能生成一张能打印的
 默写单。
